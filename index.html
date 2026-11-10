@@ -1,1 +1,239 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>مغامرة بيتنا الثاني | مدرسة صالح شيخ أحمد الابتدائية</title><style>
+:root{font-family:Tahoma,Arial,sans-serif;color:#27443a;background:#f8f6ee}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 5%,#fbe8bd,transparent 38%),linear-gradient(150deg,#e5f4e9,#fff9ed)}main{max-width:820px;margin:25px auto;padding:20px}.panel{background:#fffdf8;border:2px solid #dce9d6;border-radius:28px;padding:28px;box-shadow:0 12px 35px #45694c18}header{text-align:center;margin-bottom:24px}.logo{font-size:55px}h1{font-size:clamp(27px,5vw,42px);margin:6px;color:#276247}h2{font-size:25px;color:#32634a}p{line-height:1.9}button,select,input{font:inherit}.speaker{background:#f4df9d;color:#473a16;border:2px solid #b78c32;min-height:52px}.student-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:430px;overflow:auto;padding:4px}.student-grid button{margin:0;background:#edf5e8;color:#24533b;border:2px solid #b6d3ba;min-height:64px;padding:9px;font-size:17px}.student-grid button.active{background:#287c57;color:white;border-color:#1c6141}.voice-hint{font-size:13px;color:#6c6447}.voice-controls{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}.voice-controls select{width:auto;max-width:100%;margin:0}.voice-controls button{margin:0}.listenbar{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:8px 0 18px}button{cursor:pointer;background:#34805d;color:white;border:0;border-radius:14px;padding:14px 22px;margin:6px;font-weight:bold}button:hover{background:#236849}button:disabled{opacity:.4;cursor:not-allowed}.ghost{background:#e8f0e6;color:#2b6048}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.choices button{min-height:90px;font-size:19px}.hide{display:none}.step{text-align:center;font-size:14px;color:#62806a;margin-bottom:20px}.name{font-weight:bold;color:#287452}select,input{width:100%;padding:14px;border:2px solid #d4e4d7;border-radius:12px;background:white;margin:12px 0;font-size:18px}.activity{background:#f1f8ef;border-radius:20px;padding:20px;margin:16px 0}.feedback{min-height:26px;color:#2d7552;font-weight:bold}.values button{background:#c78a43}.cert{border:9px double #c6a25c;background:#fff9e8;padding:30px 15px;margin:20px 0}.cert h2{color:#996b28}.cert .student{font-size:30px;font-weight:bold;color:#22694b}.footer{font-size:12px;color:#667c70;text-align:center;margin-top:25px}@media(max-width:480px){main{padding:10px}.panel{padding:18px}.choices{grid-template-columns:1fr 1fr}.choices button{font-size:16px;padding:12px 7px}}@media print{body{background:white}header,.no-print,.footer,.step{display:none!important}main{max-width:none;margin:0}.panel{box-shadow:none;border:0}.cert{margin:80px 0}}
+.voice-controls{display:none}.answer-with-audio{display:flex;gap:8px;align-items:stretch;margin:8px 0}.answer-with-audio>button:first-child{flex:1}.answer-replay{width:50px;min-width:50px;padding:9px!important;background:#e5f4ee!important;color:#174d37!important;border:2px solid #a3cfb8!important;border-radius:12px!important}#promiseChoices .answer-replay{margin-inline-start:6px} </style></head><body><main><header><div class="logo">🏡🌳</div><h1>مغامرة بيتنا الثاني</h1><strong>مدرسة صالح شيخ أحمد الابتدائية</strong><p>معًا نعيد النور إلى بيتنا باللطف والصداقة والقيم الجميلة ✨</p></header><div class="panel"><div id="step" class="step"></div><div class="listenbar"><button class="speaker" id="listenBtn" type="button">🔊 استمع إلى التعليمات</button><button class="ghost" id="stopVoice" type="button">⏹ إيقاف</button></div><div class="voice-controls"><label for="voiceChoice">🎙️ صوت الراوية العربية:</label><select id="voiceChoice" aria-label="اختيار صوت الراوية"><option value="">البحث عن صوت عربي مناسب…</option></select><button type="button" class="ghost" id="testVoice">▶️ جرّب صوت الراوية</button></div><p id="voiceStatus" class="voice-hint" role="status" aria-live="polite"></p><button id="audioRetry" type="button" class="speaker hide" style="margin:8px auto 18px;display:none">🔊 اضغط هنا للاستماع</button><section id="home"><h2>أهلًا بك في مغامرتنا!</h2><p>اختر صفك لتبدأ رحلة مليئة بالمواقف الجميلة.</p><div id="classes" class="choices"><button type="button" data-class="أول الزيتون">🫒 أول الزيتون</button><button type="button" data-class="أول السنديان">🌳 أول السنديان</button><button type="button" data-class="ثاني الزيتون">🫒 ثاني الزيتون</button><button type="button" data-class="ثاني السنديان">🌳 ثاني السنديان</button></div></section><section id="students" class="hide"><h2>من بطل مغامرتنا اليوم؟ ⭐</h2><p id="classLabel"></p><p>اضغط على اسمك من البطاقات التالية:</p><div id="studentCards" class="student-grid"></div><div><button id="start" disabled>ابدأ المغامرة 🚀</button><button class="ghost" onclick="show('home')">العودة للصفوف</button></div></section><section id="light" class="hide"><h2>🏡 بيت الصف انطفأ!</h2><div class="activity"><div style="font-size:70px" id="house">🏠🌙</div><p>يا <span class="name who"></span>، يحتاج بيتنا الثاني إلى أفعال جميلة حتى يعود إليه النور!</p><button onclick="lightUp()">أضيء البيت بكلمة طيبة ✨</button><div id="lightMsg" class="feedback"></div></div><button id="nextLight" class="hide" onclick="show('situations')">إلى المواقف التربوية ←</button></section><section id="situations" class="hide"><h2>🤝 مواقف في بيتنا الثاني</h2><p>اختر التصرف الذي يجعل مدرستنا أجمل.</p><div class="activity"><div id="question"></div><div style="margin:10px 0;padding:10px;border:2px solid #b5d8b6;border-radius:12px;background:#eef7ec"><button id="replayQuestion" type="button" class="speaker">🔊 استمع إلى السؤال</button><audio id="questionNativeAudio" preload="auto" style="display:none" aria-label="تسجيل السؤال"></audio></div><div id="answers" class="choices"></div><p id="answerMsg" class="feedback"></p></div><button class="ghost" onclick="show('light')">السابق</button></section><section id="promise" class="hide"><h2>🖐️ بصمة الصداقة</h2><div class="activity" style="text-align:center"><button id="replayPromise" type="button" class="speaker">🔊 استمع إلى تعليمات بصمة الصداقة</button><audio id="promiseNativeAudio" preload="metadata" style="display:none" aria-label="تعليمات بصمة الصداقة"></audio></div><p>ما الوعد الجميل الذي ستقدمه لأصدقائك؟</p><p>اختر وعدًا من الأزرار، أو اكتب وعدك الخاص:</p><div id="promiseChoices" class="choices"><button type="button" data-promise="سأساعد أصدقائي">🤝 سأساعد أصدقائي</button><button type="button" data-promise="سأحترم الجميع">💚 سأحترم الجميع</button><button type="button" data-promise="سأكون صادقًا">⭐ سأكون صادقًا</button><button type="button" data-promise="سأشارك الآخرين">🌼 سأشارك الآخرين</button></div><input id="promiseInput" placeholder="أو اكتب وعدك هنا"><button onclick="stamp()">أضع بصمتي 🤚</button><p id="stampMsg" class="feedback"></p><button id="nextPromise" class="hide" onclick="show('tree')">إلى شجرة القيم ←</button></section><section id="tree" class="hide"><div class="stage-audio" style="background:#eef7ec;border:2px solid #b5d8b6;border-radius:15px;padding:12px;margin:12px 0;text-align:center"><button type="button" class="speaker stageReplay">🔊 استمع إلى تعليمات المرحلة</button><audio id="treeNativeAudio" preload="auto" style="display:none" aria-label="تسجيل تعليمات المرحلة"></audio></div><h2>🌳 شجرة القيم</h2><p>اختر ثلاث قيم جميلة لتزرعها في بيتنا الثاني.</p><div class="activity"><div style="font-size:68px">🌳</div><div id="values" class="values"></div><p id="picked" class="feedback"></p></div><button id="nextTree" class="hide" onclick="show('certificate')">احصل على شهادتك 🏅</button></section><section id="certificate" class="hide"><div class="stage-audio" style="background:#eef7ec;border:2px solid #b5d8b6;border-radius:15px;padding:12px;margin:12px 0;text-align:center"><button type="button" class="speaker stageReplay">🔊 استمع إلى تعليمات المرحلة</button><audio id="certificateNativeAudio" preload="auto" style="display:none" aria-label="تسجيل تعليمات المرحلة"></audio></div><div class="cert"><div style="font-size:50px">🏅</div><h2>شهادة تقدير</h2><p id="certAddress">تُمنح بكل فخر إلى الطالب</p><div id="certName" class="student"></div><p>من صف <strong id="certClass"></strong></p><p id="certParticipation">لمشاركته الرائعة في <strong>مغامرة بيتنا الثاني</strong> ونشر قيم الصداقة والاحترام والتعاون.</p><strong>مدرسة صالح شيخ أحمد الابتدائية</strong><p>🌿 ⭐ 🌿</p></div><div class="no-print"><button onclick="window.print()">طباعة الشهادة 🖨️</button><button class="ghost" onclick="restart()">مغامرة جديدة</button></div></section></div><div class="footer">نسخة تجريبية محلية. لا تُرسل الإجابات إلى أي خادم. لا تنشر قوائم الطلاب على موقع عام دون موافقة وإجراءات حماية مناسبة.</div></main><script>
+const DATA={"أول الزيتون": [{"id": "0-0", "name": "فتحي شيخ أحمد", "gender": "m"}, {"id": "0-1", "name": "أيهم أبو الهيجا", "gender": "m"}, {"id": "0-2", "name": "جوان أبو الهيجا", "gender": "f"}, {"id": "0-3", "name": "مها إدريس", "gender": "f"}, {"id": "0-4", "name": "تالين خطيب", "gender": "f"}, {"id": "0-5", "name": "مصطفى خطيب", "gender": "m"}, {"id": "0-6", "name": "مصطفى رسلان", "gender": "m"}, {"id": "0-7", "name": "رهف شيخ أحمد", "gender": "f"}, {"id": "0-8", "name": "ورد شيخ أحمد", "gender": "f"}, {"id": "0-9", "name": "وطن شيخ أحمد", "gender": "f"}, {"id": "0-10", "name": "أسينات طه", "gender": "f"}, {"id": "0-11", "name": "محمد عثمان", "gender": "m"}, {"id": "0-12", "name": "عليا غزاوي", "gender": "f"}, {"id": "0-13", "name": "قمرنا غزاوي", "gender": "f"}, {"id": "0-14", "name": "حسين قسوم", "gender": "m"}, {"id": "0-15", "name": "روز قسوم", "gender": "f"}, {"id": "0-16", "name": "إيلين قيس", "gender": "f"}, {"id": "0-17", "name": "ريفان مريسات", "gender": "f"}, {"id": "0-18", "name": "سدرة مريسات", "gender": "f"}, {"id": "0-19", "name": "ملك مريسات", "gender": "f"}, {"id": "0-20", "name": "يامن مريسات", "gender": "m"}, {"id": "0-21", "name": "يحيى ميلاد", "gender": "m"}], "أول السنديان": [{"id": "1-0", "name": "محمد مريسات", "gender": "m"}, {"id": "1-1", "name": "علياء مريسات", "gender": "f"}, {"id": "1-2", "name": "حسني جاروشي", "gender": "m"}, {"id": "1-3", "name": "حسن شيخ أحمد", "gender": "m"}, {"id": "1-4", "name": "لينا شيخ أحمد", "gender": "f"}, {"id": "1-5", "name": "هلال شيخ أحمد", "gender": "m"}, {"id": "1-6", "name": "يارين شيخ أحمد", "gender": "f"}, {"id": "1-7", "name": "أرام عثمان", "gender": "f"}, {"id": "1-8", "name": "سالي محروم", "gender": "f"}, {"id": "1-9", "name": "أحمد مريسات", "gender": "m"}, {"id": "1-10", "name": "حكمت مريسات", "gender": "m"}, {"id": "1-11", "name": "حنين مريسات", "gender": "f"}, {"id": "1-12", "name": "سدرة مريسات", "gender": "f"}, {"id": "1-13", "name": "فرح مريسات", "gender": "f"}, {"id": "1-14", "name": "محمد مريسات", "gender": "m"}], "ثاني الزيتون": [{"id": "2-0", "name": "مريم أبو الهيجا", "gender": "f"}, {"id": "2-1", "name": "عبد الكريم أبو صالح", "gender": "m"}, {"id": "2-2", "name": "رانية أحمد", "gender": "f"}, {"id": "2-3", "name": "دانا إدريس", "gender": "f"}, {"id": "2-4", "name": "عاطف إدريس", "gender": "m"}, {"id": "2-5", "name": "ناي إدريس", "gender": "f"}, {"id": "2-6", "name": "محمد الأمير", "gender": "m"}, {"id": "2-7", "name": "يقين حيدر", "gender": "f"}, {"id": "2-8", "name": "لمى خطيب", "gender": "f"}, {"id": "2-9", "name": "عرسان رسلان", "gender": "m"}, {"id": "2-10", "name": "محمد رسلان", "gender": "m"}, {"id": "2-11", "name": "مجد سكران", "gender": "m"}, {"id": "2-12", "name": "إبراهيم شيخ أحمد", "gender": "m"}, {"id": "2-13", "name": "أمير شيخ أحمد", "gender": "m"}, {"id": "2-14", "name": "تالين شيخ أحمد", "gender": "f"}, {"id": "2-15", "name": "حلا شيخ أحمد", "gender": "f"}, {"id": "2-16", "name": "زينة شيخ أحمد", "gender": "f"}, {"id": "2-17", "name": "علي شيخ أحمد", "gender": "m"}, {"id": "2-18", "name": "محمد شيخ أحمد", "gender": "m"}, {"id": "2-19", "name": "خديجة عثمان", "gender": "f"}, {"id": "2-20", "name": "ملاك عوالي", "gender": "f"}, {"id": "2-21", "name": "محمد محسن", "gender": "m"}, {"id": "2-22", "name": "إبراهيم مريسات", "gender": "m"}, {"id": "2-23", "name": "لارين مريسات", "gender": "f"}, {"id": "2-24", "name": "اليسار ميلاد", "gender": "f"}, {"id": "2-25", "name": "خالد ميلاد", "gender": "m"}, {"id": "2-26", "name": "جود نعيمي", "gender": "m"}], "ثاني السنديان": [{"id": "3-0", "name": "كريم أبو الهيجا", "gender": "m"}, {"id": "3-1", "name": "سيمي أبو عصب", "gender": "f"}, {"id": "3-2", "name": "علاء الأمير", "gender": "m"}, {"id": "3-3", "name": "علي الأمير", "gender": "m"}, {"id": "3-4", "name": "كامل الفقير", "gender": "m"}, {"id": "3-5", "name": "جاد حسنين", "gender": "m"}, {"id": "3-6", "name": "جواد حسنين", "gender": "m"}, {"id": "3-7", "name": "محمد حيدر", "gender": "m"}, {"id": "3-8", "name": "جوري خطيب", "gender": "f"}, {"id": "3-9", "name": "أمير داموني", "gender": "m"}, {"id": "3-10", "name": "آدم زيود", "gender": "m"}, {"id": "3-11", "name": "بيسان شيخ أحمد", "gender": "f"}, {"id": "3-12", "name": "أسيل عودة", "gender": "f"}, {"id": "3-13", "name": "يوسف كراجولا", "gender": "m"}, {"id": "3-14", "name": "تالا مريسات", "gender": "f"}, {"id": "3-15", "name": "شمس مريسات", "gender": "f"}, {"id": "3-16", "name": "محمد مريسات", "gender": "m"}]};
+const $=id=>document.getElementById(id);
+const sections=['home','students','light','situations','promise','tree','certificate'];
+const questions=[
+ {q:'رأيت زميلًا يجلس وحده في الاستراحة. ماذا تفعل؟',a:['أدعوه للعب معنا','أتجاهله'],clips:['14_answer_1_a','15_answer_1_b'],clip:'13_question_1'},
+ {q:'سقطت أدوات زميلك على الأرض. ماذا تفعل؟',a:['أساعده في جمعها','أضحك عليه'],clips:['17_answer_2_a','18_answer_2_b'],clip:'16_question_2'},
+ {q:'اختلفت مع صديقك في لعبة. ما الأفضل؟',a:['أتحدث معه بهدوء','أصرخ عليه'],clips:['20_answer_3_a','21_answer_3_b'],clip:'19_question_3'}
+];
+// Gender-specific audio mapping: never infer gender from filename alone.
+const genderAudio={
+ '16_question_2':{m:'16_question_2_boy',f:'16_question_2_female'},
+ '17_answer_2_a':{m:'17_answer_2_a_boy',f:'17_answer_2_a'},
+ '18_answer_2_b':{m:'18_answer_2_b_boy',f:'18_answer_2_b'}
+};
+const QUESTION_TEXT={
+ m:[
+  {q:'رأيتَ زميلًا يجلس وحده في الاستراحة. ماذا تفعل؟',a:['أدعوه للعب معنا','أتجاهله']},
+  {q:'سقطت أدوات زميلك على الأرض. ماذا تفعل؟',a:['أساعده في جمعها','أضحك عليه']},
+  {q:'اختلفت مع صديقك في لعبة. ما الأفضل؟',a:['أتحدث معه بهدوء','أصرخ عليه']}
+ ],
+ f:[
+  {q:'رأيتِ زميلةً تجلس وحدها في الاستراحة. ماذا تفعلين؟',a:['أدعوها للعب معنا','أتجاهلها']},
+  {q:'سقطت أدوات زميلتكِ على الأرض. ماذا تفعلين؟',a:['أساعدها في جمعها','أضحك عليها']},
+  {q:'اختلفتِ مع صديقتكِ في لعبة. ما التصرف الأفضل؟',a:['أتحدث معها بهدوء','أصرخ عليها']}
+ ]
+};
+const gendered=new Set(['02_choose_class','08_start','11_house_success','13_question_1','19_question_3','22_correct','23_retry','24_promise_intro','14_answer_1_a','15_answer_1_b','20_answer_3_a','21_answer_3_b','31_tree_intro','39_certificate','27_promise_3','29_promise_success','30_promise_missing','38_tree_success']);
+const clipFiles=new Set(["01_welcome", "02_choose_class", "02_choose_class_female", "03_class_olive_one", "04_class_oak_one", "05_class_olive_two", "06_class_oak_two", "07_choose_student", "08_start_female", "08_start_new", "09_house_intro", "10_house_button", "11_house_success", "11_house_success_female", "12_situations_intro", "13_question_1", "13_question_1_female", "14_answer_1_a", "14_answer_1_a_female", "15_answer_1_b", "15_answer_1_b_female", "16_question_2", "16_question_2_boy", "16_question_2_female", "17_answer_2_a", "17_answer_2_a_boy", "18_answer_2_b", "18_answer_2_b_boy", "19_question_3", "19_question_3_female", "20_answer_3_a", "20_answer_3_a_female", "21_answer_3_b", "21_answer_3_b_female", "22_correct", "22_correct_female", "23_retry", "23_retry_female", "24_promise_intro", "24_promise_intro_female", "25_promise_1", "26_promise_2", "27_promise_3", "28_promise_4", "29_promise_success", "30_promise_missing", "31_tree_intro", "31_tree_intro_female", "32_value_respect", "33_value_cooperation", "34_value_honesty", "35_value_kindness", "36_value_responsibility", "37_value_friendship", "38_tree_success", "39_certificate", "39_certificate_female", "40_listen_again", "41_new_adventure"]);
+let className='',selectedStudent=null,questionIndex=0,selectedValues=[],audioEnabled=false;
+let stage='home',playSerial=0,advanceTimer=null;
+const player=new Audio();player.preload='auto';
+function stopAudio(){for(const id of ['promiseNativeAudio','treeNativeAudio','certificateNativeAudio','questionNativeAudio']){const a=document.getElementById(id);if(a)a.pause();}playSerial++;player.pause();player.removeAttribute('src');player.load();if(advanceTimer){clearTimeout(advanceTimer);advanceTimer=null;}}
+function status(msg){$('voiceStatus').textContent=msg||'';}
+function showRetry(){const b=$('audioRetry');b.classList.remove('hide');b.style.display='inline-block';}
+function hideRetry(){const b=$('audioRetry');b.classList.add('hide');b.style.display='none';}
+$('audioRetry').onclick=()=>{audioEnabled=true;if(stage==='situations'&&narrationQueue.length){playQueuedItem();return;}if(stage==='promise'||stage==='situations'||stage==='tree'){playStage();}else if(stage==='certificate'){$(stage+'NativeAudio').play().catch(()=>{});}else playStage();};
+function clipPath(base){
+ const gender=selectedStudent?.gender||'m';
+ if(genderAudio[base])return genderAudio[base][gender];
+ if(gender==='f' && gendered.has(base)){
+  const feminine=base+'_female';
+  if(clipFiles.has(feminine))return feminine;
+  // No incorrect masculine recording for a girl's gender-specific line.
+  return null;
+ }
+ return base;
+}
+function playClip(base,onDone){
+ stopAudio();hideRetry();const serial=playSerial;
+ const actual=clipPath(base);
+ // Never play masculine narration for a girl. Missing recordings are skipped silently.
+ if(!actual || !clipFiles.has(actual)){
+  status('هذا التسجيل غير متوفر بعد بصيغة مناسبة.');
+  if(onDone)advanceTimer=setTimeout(()=>{if(serial===playSerial)onDone()},1100);
+  return;
+ }
+ player.onended=null;player.onerror=null;
+ player.src='audio/'+actual+'.mp3';
+ player.onended=()=>{if(serial!==playSerial)return;status('');if(onDone)onDone()};
+ player.onerror=()=>{if(serial!==playSerial)return;status('اضغط على زر الاستماع لسماع التعليمات.');showRetry();if(onDone)advanceTimer=setTimeout(()=>{if(serial===playSerial)onDone()},1100)};
+ status('');
+ const promise=player.play();
+ if(promise)promise.catch(()=>{
+  if(serial!==playSerial)return;
+  status('اضغط على الزر الأصفر للاستماع إلى التعليمات.');showRetry();
+  if(onDone)advanceTimer=setTimeout(()=>{if(serial===playSerial)onDone()},1400);
+ });
+}
+// Play the instruction followed by every visible option, in order.
+// Play every item in order; never skip a question when the browser blocks playback.
+let narrationQueue=[],narrationPosition=0;
+function playSequence(bases){
+ narrationQueue=bases.slice();narrationPosition=0;
+ playQueuedItem();
+}
+function playQueuedItem(){
+ if(!audioEnabled||narrationPosition>=narrationQueue.length)return;
+ const base=narrationQueue[narrationPosition];
+ const actual=clipPath(base);
+ if(!actual||!clipFiles.has(actual)){
+  status('هذا التسجيل غير متوفر بعد بصيغة مناسبة.');narrationPosition++;playQueuedItem();return;
+ }
+ stopAudio();hideRetry();
+ const serial=playSerial;
+ player.onended=null;player.onerror=null;
+ player.src='audio/'+actual+'.mp3';
+ player.onended=()=>{if(serial!==playSerial)return;narrationPosition++;playQueuedItem()};
+ player.onerror=()=>{if(serial!==playSerial)return;status('تعذر تشغيل التسجيل. اضغط على زر الاستماع للمحاولة مرة أخرى.');showRetry()};
+ const promise=player.play();
+ if(promise)promise.catch(()=>{if(serial!==playSerial)return;status('اضغط على زر الاستماع لتشغيل السؤال ثم الإجابات.');showRetry()});
+}
+function playSituationNarration(){
+ $('questionNativeAudio').pause();
+ const q=questions[questionIndex];playSequence([q.clip,q.clips[0],q.clips[1]]);
+}
+const promiseOptionClips=['25_promise_1','26_promise_2','27_promise_3','28_promise_4'];
+function playPromiseNarration(){playSequence(['24_promise_intro',...promiseOptionClips]);}
+function playTreeNarration(){playSequence(['31_tree_intro',...Object.values(valueClips)]);}
+function playStage(){
+ if(stage==='situations'){playSituationNarration();return;}
+ if(stage==='promise'){playPromiseNarration();return;}
+ if(stage==='tree'){playTreeNarration();return;}
+ if(stage==='certificate'){stopAudio();hideRetry();const a=$(stage+'NativeAudio');a.currentTime=0;a.play().catch(()=>showRetry());return;}
+ const clips={home:'01_welcome',students:'07_choose_student',light:'09_house_intro',situations:questions[questionIndex].clip,promise:'24_promise_intro',tree:'31_tree_intro',certificate:'39_certificate'};
+ playClip(clips[stage]);
+}
+function show(id){
+ stopAudio();hideRetry();status('');stage=id;
+ sections.forEach(s=>$(s).classList.toggle('hide',s!==id));
+ $('step').textContent='المرحلة '+(sections.indexOf(id)+1)+' من '+sections.length;
+ if(id==='promise'){const a=$('promiseNativeAudio');a.pause();a.src='audio/'+(selectedStudent?.gender==='f'?'24_promise_intro_female.mp3':'24_promise_intro.mp3');a.load();}
+ if(id==='tree'||id==='certificate'){const a=$(id+'NativeAudio');a.src='audio/'+(id==='tree'?clipPath('31_tree_intro')+'.mp3':clipPath('39_certificate')+'.mp3');a.load();}
+ if(id==='situations')renderQuestion();
+ if(id==='promise')renderPromiseGender();
+ if(id==='tree'){renderValues();document.querySelector('#tree > p').textContent=selectedStudent?.gender==='f'?'اختاري ثلاث قيم جميلة لتزرعيها في بيتنا الثاني.':'اختر ثلاث قيم جميلة لتزرعها في بيتنا الثاني.';}
+ if(id==='certificate' && selectedStudent){
+  $('certName').textContent=selectedStudent.name;
+  $('certClass').textContent=className;
+  $('certAddress').textContent=selectedStudent.gender==='f'?'تُمنح بكل فخر إلى الطالبة':'تُمنح بكل فخر إلى الطالب';
+  $('certParticipation').firstChild.textContent=selectedStudent.gender==='f'?'لمشاركتها الرائعة في ':'لمشاركته الرائعة في ';
+ }
+ window.scrollTo(0,0);
+ if(audioEnabled)playStage();
+}
+$('listenBtn').onclick=()=>{audioEnabled=true;if(stage==='promise'||stage==='situations'||stage==='tree'){playStage();}else if(stage==='certificate'){const a=$(stage+'NativeAudio');a.currentTime=0;a.play().catch(()=>showRetry());}else playStage()};
+$('stopVoice').onclick=()=>{stopAudio();hideRetry();audioEnabled=false;status('')};
+for(const b of document.querySelectorAll('[data-class]'))b.onclick=()=>{
+ className=b.dataset.class;selectedStudent=null;const grid=$('studentCards');grid.replaceChildren();
+ const names=DATA[className];
+ names.forEach((entry,i)=>{
+  const card=document.createElement('button');card.type='button';
+  const same=names.filter(n=>n.name===entry.name);
+  card.textContent=entry.name+(same.length>1?' ('+(same.findIndex(n=>n.id===entry.id)+1)+')':'');
+  card.onclick=()=>{
+   selectedStudent=entry;
+   grid.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+   card.classList.add('active');$('start').disabled=false;
+   // Narration after selecting a name is determined by the selected student's gender.
+   if(audioEnabled)playClip('08_start_new');
+  };
+  grid.appendChild(card);
+ });
+ $('classLabel').textContent='صف '+className;$('start').disabled=true;show('students');
+};
+$('start').onclick=()=>{
+ if(!selectedStudent)return;
+ document.querySelectorAll('.who').forEach(x=>x.textContent=selectedStudent.name);
+ show('light');
+};
+function lightUp(){
+ $('house').textContent='🏡☀️✨';$('lightMsg').textContent='أحسنت! الكلمات الطيبة تنير بيتنا.';
+ $('nextLight').classList.remove('hide');if(audioEnabled)playClip('11_house_success');
+}
+function renderQuestion(){
+ const q=questions[questionIndex];
+ const gender=selectedStudent?.gender==='f'?'f':'m';
+ const visible=QUESTION_TEXT[gender][questionIndex];
+ $('question').textContent=visible.q;
+ const qa=$('questionNativeAudio');const clip=clipPath(q.clip);
+ if(clip){qa.src='audio/'+clip+'.mp3';qa.load();}else{qa.removeAttribute('src');qa.load();}
+ $('answers').replaceChildren();$('answerMsg').textContent='';
+ q.a.forEach((answer,j)=>{
+  const b=document.createElement('button');b.textContent=visible.a[j];
+  b.onclick=()=>{
+   if(j===0){
+    $('answerMsg').textContent='رائع! هذا تصرف لطيف 💚';
+    $('answers').querySelectorAll('.answer-with-audio > button:first-child').forEach(x=>x.disabled=true);
+    const advance=()=>{if(stage!=='situations')return;questionIndex++;if(questionIndex===questions.length)show('promise');else{renderQuestion();if(audioEnabled)playStage()}};
+    if(audioEnabled)playClip('22_correct',advance);else advanceTimer=setTimeout(advance,900);
+   }else{
+    $('answerMsg').textContent=selectedStudent?.gender==='f'?'فكّري مرة أخرى: ما التصرف الأكثر لطفًا؟':'فكّر مرة أخرى: ما التصرف الأكثر لطفًا؟';
+    if(audioEnabled)playClip('23_retry');
+   }
+  };
+  const wrapper=document.createElement('div');wrapper.className='answer-with-audio';
+  const replay=document.createElement('button');replay.type='button';replay.className='answer-replay';
+  replay.textContent='🔊';replay.setAttribute('aria-label','استمع إلى الإجابة: '+b.textContent);
+  replay.onclick=()=>{audioEnabled=true;playClip(q.clips[j]);};
+  wrapper.append(b,replay);$('answers').appendChild(wrapper);
+ });
+}
+function renderPromiseGender(){
+ const girl=selectedStudent?.gender==='f';
+ const b=document.querySelector('[data-promise="سأكون صادقًا"]');
+ if(b)b.textContent=girl?'⭐ سأكون صادقةً':'⭐ سأكون صادقًا';
+ const intro=document.querySelector('#promise > p');
+ if(intro)intro.textContent=girl?'ما الوعد الجميل الذي ستقدمينه لصديقاتك وأصدقائك؟':'ما الوعد الجميل الذي ستقدمه لأصدقائك؟';
+}
+document.querySelectorAll('[data-promise]').forEach((b,i)=>{
+ const replay=document.createElement('button');replay.type='button';replay.className='answer-replay';replay.textContent='🔊';
+ replay.setAttribute('aria-label','استمع إلى الوعد: '+b.dataset.promise);
+ replay.onclick=()=>{audioEnabled=true;playClip(promiseOptionClips[i]);};
+ b.after(replay);
+});
+document.querySelectorAll('[data-promise]').forEach(b=>b.onclick=()=>{
+ $('promiseInput').value=(selectedStudent?.gender==='f'&&b.dataset.promise==='سأكون صادقًا')?'سأكون صادقةً':b.dataset.promise;
+ const clips={'سأساعد أصدقائي':'25_promise_1','سأحترم الجميع':'26_promise_2','سأكون صادقًا':'27_promise_3','سأشارك الآخرين':'28_promise_4'};
+ if(audioEnabled)playClip(clips[b.dataset.promise]);
+});
+function stamp(){
+ const p=$('promiseInput').value.trim();
+ if(!p){$('stampMsg').textContent=selectedStudent?.gender==='f'?'اختاري وعدًا جميلًا أولًا':'اختر وعدًا جميلًا أولًا';if(audioEnabled)playClip('30_promise_missing');return}
+ $('stampMsg').textContent='🤚 بصمتك جميلة! وعدك: '+p;
+ $('nextPromise').classList.remove('hide');if(audioEnabled)playClip('29_promise_success');
+}
+const valueClips={'الاحترام':'32_value_respect','التعاون':'33_value_cooperation','الصدق':'34_value_honesty','الرحمة':'35_value_kindness','المسؤولية':'36_value_responsibility','الصداقة':'37_value_friendship'};
+function playValueAudio(base){
+ const a=$('treeNativeAudio');stopAudio();a.src='audio/'+base+'.mp3';a.load();a.play().catch(()=>showRetry());
+}
+function renderValues(){
+ const el=$('values');el.replaceChildren();
+ Object.keys(valueClips).forEach(v=>{
+  const b=document.createElement('button');b.textContent=(selectedValues.includes(v)?'✓ ':'🌱 ')+v;
+  b.onclick=()=>{
+   if(selectedValues.includes(v))selectedValues=selectedValues.filter(x=>x!==v);
+   else if(selectedValues.length<3)selectedValues.push(v);
+   renderValues();
+   if(audioEnabled){const clip=clipPath(selectedValues.length===3?'38_tree_success':valueClips[v]);if(clip)playValueAudio(clip);else status('هذا التسجيل غير متوفر بعد بصيغة مناسبة.');}
+  };el.appendChild(b);
+ });
+ $('picked').textContent=selectedValues.length?'قيمك: '+selectedValues.join('، '):(selectedStudent?.gender==='f'?'اختاري ثلاث قيم':'اختر ثلاث قيم');
+ $('nextTree').classList.toggle('hide',selectedValues.length!==3);
+}
+function restart(){
+ className='';selectedStudent=null;questionIndex=0;selectedValues=[];
+ $('promiseInput').value='';$('stampMsg').textContent='';$('nextPromise').classList.add('hide');
+ $('nextLight').classList.add('hide');$('house').textContent='🏠🌙';$('lightMsg').textContent='';show('home');
+}
 
+$('replayQuestion').onclick=()=>{audioEnabled=true;stopAudio();const a=$('questionNativeAudio');a.currentTime=0;a.play().catch(()=>showRetry());};
+$('replayPromise').onclick=()=>{audioEnabled=true;stopAudio();const a=$('promiseNativeAudio');a.currentTime=0;a.play().catch(()=>showRetry());};
+document.querySelector('#tree .stageReplay').onclick=()=>{audioEnabled=true;stopAudio();const a=$('treeNativeAudio');a.src='audio/'+clipPath('31_tree_intro')+'.mp3';a.load();a.play().catch(()=>showRetry());};
+document.querySelector('#certificate .stageReplay').onclick=()=>{audioEnabled=true;stopAudio();const a=$('certificateNativeAudio');a.currentTime=0;a.play().catch(()=>showRetry());};
+
+show('home');
+</script></body></html>
